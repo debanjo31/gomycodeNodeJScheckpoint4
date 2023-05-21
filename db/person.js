@@ -1,8 +1,7 @@
 let mongoose = require("mongoose");
-let validator = require("validator");
 let personSchema = new mongoose.Schema({
   person: {
-    name: { type: String, required: true },
+    name: { type: String },
     age: { type: Number },
     favoriteFoods: { type: [String] },
   },
