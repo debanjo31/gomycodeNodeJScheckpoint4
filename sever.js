@@ -6,10 +6,14 @@ const PORT = process.env.DB_PORT;
 const Person = require("./db/person");
 
 app.get("/", (req, res) => {
-  //   res.sendFile(__dirname + '/form.html');
   res.send("Sever started");
+  //start sever
   main();
   manyRecord();
+  findAndRemove();
+  deleteAndUpdate();
+  deleteRecord();
+  chainQuery();
 });
 
 async function main() {
@@ -50,7 +54,6 @@ async function manyRecord() {
   try {
     // Save the person document.
     // Create the people
-    // Create the people
     const promises = people.map((person) => Person.create(person));
 
     // Wait for all the promises to resolve
@@ -72,14 +75,16 @@ Person.find({ name: "John Doe" }, function (err, person) {
   }
 });
 
-//Delete One Document Using model.findByIdAndRemove
-Person.findOneAndRemove({ name: "John Doe" }, function (err, data) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Person deleted successfully!");
-  }
-});
+async function findAndRemove() {
+  //Delete One Document Using model.findByIdAndRemove
+  Person.findOneAndRemove({ name: "John Doe" }, function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Person deleted successfully!");
+    }
+  });
+}
 
 async function deleteRecord() {
   const query = { name: "Mary" };
